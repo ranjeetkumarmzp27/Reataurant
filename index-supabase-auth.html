@@ -1,0 +1,4777 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Special Custom | Restaurant QR System</title>
+
+<style>
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+ font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+ --gold:#d4af37;
+ --gold2:#f3d477;
+ --dark:#090909;
+ --dark2:#171717;
+ --light:#f4f3ef;
+ --green:#15803d;
+ --red:#b91c1c;
+}
+
+body{
+ background:var(--light);
+ color:#171717;
+}
+
+button,input,select,textarea{
+ font:inherit;
+}
+
+button{
+ cursor:pointer;
+ border:0;
+}
+
+.hidden{
+ display:none!important;
+}
+
+/* HEADER */
+
+header{
+ background:linear-gradient(135deg,#050505,#1c1c1c);
+ color:white;
+ padding:14px 18px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+ position:sticky;
+ top:0;
+ z-index:100;
+ box-shadow:0 4px 25px #0005;
+}
+
+.logo{
+ font-size:21px;
+ font-weight:800;
+}
+
+.logo span{
+ color:var(--gold2);
+}
+
+nav button{
+ background:#252525;
+ color:white;
+ border:1px solid #444;
+ padding:8px 12px;
+ border-radius:8px;
+ margin:2px;
+}
+
+nav button:hover{
+ background:var(--gold);
+ color:#111;
+}
+
+.container{
+ max-width:1150px;
+ margin:auto;
+ padding:18px;
+}
+
+/* LOGIN */
+
+#loginPage{
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ padding:20px;
+ background:
+ linear-gradient(#0009,#0009),
+ url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4")
+ center/cover;
+}
+
+.login-box{
+ width:100%;
+ max-width:420px;
+ background:white;
+ padding:28px;
+ border-radius:18px;
+ box-shadow:0 15px 50px #0007;
+}
+
+.login-logo{
+ text-align:center;
+ font-size:30px;
+ font-weight:800;
+ margin-bottom:8px;
+}
+
+.login-logo span{
+ color:#b8860b;
+}
+
+.login-sub{
+ text-align:center;
+ color:#777;
+ margin-bottom:25px;
+}
+
+.login-tabs{
+ display:flex;
+ gap:8px;
+ margin-bottom:20px;
+}
+
+.login-tabs button{
+ flex:1;
+ padding:11px;
+ border-radius:8px;
+ background:#eee;
+}
+
+.login-tabs button.active{
+ background:#111;
+ color:var(--gold2);
+}
+
+.form-group{
+ margin-bottom:14px;
+}
+
+.form-group label{
+ display:block;
+ font-weight:bold;
+ margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+ width:100%;
+ padding:12px;
+ border:1px solid #ddd;
+ border-radius:9px;
+ outline:none;
+ background:white;
+}
+
+.form-group textarea{
+ min-height:90px;
+ resize:vertical;
+}
+
+.primary{
+ background:linear-gradient(135deg,#111,#333);
+ color:white;
+ padding:11px 16px;
+ border-radius:8px;
+ border:1px solid #444;
+}
+
+.gold{
+ background:linear-gradient(135deg,#b8860b,#e3bd55);
+ color:#111;
+ padding:11px 16px;
+ border-radius:8px;
+ font-weight:bold;
+}
+
+.success{
+ background:#15803d;
+ color:white;
+ padding:8px 12px;
+ border-radius:7px;
+}
+
+.danger{
+ background:#b91c1c;
+ color:white;
+ padding:8px 12px;
+ border-radius:7px;
+}
+
+.secondary{
+ background:#e5e5e5;
+ color:#111;
+ padding:9px 13px;
+ border-radius:7px;
+}
+
+.help-number{
+ text-align:center;
+ margin-top:18px;
+ padding-top:15px;
+ border-top:1px solid #eee;
+}
+
+.help-number span{
+ color:#b8860b;
+ font-weight:bold;
+}
+
+/* CUSTOMER */
+
+.brand-card{
+ background:white;
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 8px 30px #00000015;
+ margin-bottom:20px;
+}
+
+.banner{
+ width:100%;
+ height:270px;
+ object-fit:cover;
+ display:block;
+}
+
+.brand-content{
+ padding:20px;
+ display:flex;
+ align-items:center;
+ gap:16px;
+}
+
+.restaurant-logo{
+ width:82px;
+ height:82px;
+ object-fit:cover;
+ border-radius:50%;
+ border:4px solid white;
+ box-shadow:0 5px 18px #0004;
+ background:#eee;
+}
+
+.restaurant-name{
+ font-size:29px;
+ font-weight:800;
+}
+
+.restaurant-details{
+ color:#777;
+ margin-top:6px;
+ white-space:pre-line;
+}
+
+.status{
+ display:inline-block;
+ margin-top:9px;
+ padding:6px 12px;
+ border-radius:20px;
+ font-size:13px;
+ font-weight:bold;
+}
+
+.status.open{
+ background:#dcfce7;
+ color:#15803d;
+}
+
+.status.closed{
+ background:#fee2e2;
+ color:#b91c1c;
+}
+
+.status.freeze{
+ background:#e5e7eb;
+ color:#111;
+}
+
+.schedule-box{
+ background:linear-gradient(135deg,#171717,#292929);
+ color:white;
+ border-radius:15px;
+ padding:17px;
+ margin-bottom:18px;
+}
+
+.schedule-box h3{
+ color:var(--gold2);
+ margin-bottom:8px;
+}
+
+.schedule-list{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+ gap:8px;
+ margin-top:12px;
+}
+
+.day-box{
+ background:#222;
+ padding:9px;
+ border-radius:9px;
+ font-size:13px;
+ border:1px solid #444;
+}
+
+.day-box strong{
+ display:block;
+ color:var(--gold2);
+ margin-bottom:3px;
+}
+
+.search{
+ width:100%;
+ padding:14px;
+ border:1px solid #ddd;
+ border-radius:11px;
+ margin:15px 0;
+ outline:none;
+ background:white;
+}
+
+.categories{
+ display:flex;
+ gap:8px;
+ overflow:auto;
+ margin-bottom:18px;
+}
+
+.categories button{
+ padding:9px 15px;
+ background:#e7e5df;
+ border-radius:20px;
+ white-space:nowrap;
+}
+
+.categories button.active{
+ background:#151515;
+ color:var(--gold2);
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
+}
+
+.card{
+ background:white;
+ border-radius:15px;
+ overflow:hidden;
+ box-shadow:0 5px 18px #00000012;
+}
+
+.card img{
+ width:100%;
+ height:165px;
+ object-fit:cover;
+}
+
+.card-body{
+ padding:15px;
+}
+
+.card h3{
+ margin-bottom:6px;
+}
+
+.desc{
+ color:#777;
+ font-size:14px;
+ min-height:36px;
+}
+
+.price{
+ font-size:19px;
+ font-weight:bold;
+ margin:11px 0;
+}
+
+.add{
+ width:100%;
+ padding:11px;
+ border-radius:8px;
+ color:white;
+ background:linear-gradient(135deg,#111,#333);
+}
+
+.cart{
+ position:fixed;
+ right:16px;
+ bottom:16px;
+ background:linear-gradient(135deg,#111,#333);
+ color:white;
+ padding:14px 20px;
+ border-radius:30px;
+ box-shadow:0 6px 25px #0006;
+ z-index:80;
+ border:1px solid #555;
+}
+
+/* ADMIN / OWNER */
+
+.section{
+ background:white;
+ padding:21px;
+ border-radius:16px;
+ margin-bottom:18px;
+ box-shadow:0 5px 20px #0000000d;
+}
+
+.section h2,
+.section h3{
+ margin-bottom:7px;
+}
+
+.brand-preview{
+ background:#f5f5f5;
+ border-radius:14px;
+ overflow:hidden;
+ margin-top:18px;
+ border:1px solid #ddd;
+}
+
+.brand-preview img{
+ width:100%;
+ height:180px;
+ object-fit:cover;
+}
+
+.preview-content{
+ padding:13px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+}
+
+.preview-logo{
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ object-fit:cover;
+}
+
+.admin-food{
+ display:flex;
+ justify-content:space-between;
+ gap:12px;
+ padding:13px 0;
+ border-bottom:1px solid #eee;
+}
+
+.admin-food-img{
+ width:70px;
+ height:58px;
+ object-fit:cover;
+ border-radius:8px;
+}
+
+.stat-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+ gap:15px;
+}
+
+.stat{
+ background:linear-gradient(135deg,#0b0b0b,#272727);
+ color:white;
+ padding:20px;
+ border-radius:14px;
+ border:1px solid #333;
+}
+
+.stat h2{
+ color:var(--gold2);
+ margin-top:5px;
+}
+
+.freeze-panel{
+ background:#fff7ed;
+ border:1px solid #fed7aa;
+ padding:15px;
+ border-radius:12px;
+ margin-top:12px;
+}
+
+.freeze-badge{
+ display:inline-block;
+ padding:6px 10px;
+ border-radius:20px;
+ background:#111;
+ color:var(--gold2);
+ font-size:12px;
+ font-weight:bold;
+}
+
+/* MODAL */
+
+.modal{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#0009;
+ z-index:200;
+ padding:20px;
+ overflow:auto;
+}
+
+.modal-box{
+ background:white;
+ max-width:650px;
+ margin:30px auto;
+ padding:23px;
+ border-radius:16px;
+}
+
+.cart-item{
+ display:flex;
+ justify-content:space-between;
+ gap:10px;
+ padding:11px 0;
+ border-bottom:1px solid #eee;
+}
+
+.qty button{
+ width:29px;
+ height:29px;
+ border-radius:5px;
+ background:#ddd;
+}
+
+.order-box{
+ border:1px solid #eee;
+ padding:15px;
+ border-radius:10px;
+ margin-top:10px;
+}
+
+.admin-care{
+ text-align:center;
+ padding:18px;
+ background:#111;
+ color:white;
+ border-radius:14px;
+}
+
+.admin-care span{
+ color:var(--gold2);
+ font-weight:bold;
+ font-size:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+ header{
+  flex-direction:column;
+  align-items:stretch;
+ }
+
+ nav{
+  text-align:center;
+ }
+
+ .banner{
+  height:190px;
+ }
+
+ .brand-content{
+  padding:15px;
+ }
+
+ .restaurant-logo{
+  width:64px;
+  height:64px;
+ }
+
+ .restaurant-name{
+  font-size:21px;
+ }
+
+ .container{
+  padding:12px;
+ }
+
+ .admin-food{
+  flex-direction:column;
+ }
+
+ .schedule-list{
+  grid-template-columns:1fr 1fr;
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+LOGIN
+===================================================== -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<div class="login-logo">
+🍽️ <span>Special Custom</span>
+</div>
+
+<div class="login-sub">
+Restaurant Management System
+</div>
+
+<div class="login-tabs">
+
+<button
+id="adminTab"
+class="active"
+onclick="selectLoginType('admin')">
+Admin Login
+</button>
+
+<button
+id="ownerTab"
+onclick="selectLoginType('owner')">
+Owner Login
+</button>
+
+</div>
+
+<div class="form-group">
+
+<label>Login ID</label>
+
+<input
+id="loginId"
+placeholder="Enter Admin Login ID">
+
+</div>
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Enter Password">
+
+</div>
+
+<button
+class="gold"
+style="width:100%"
+onclick="login()">
+
+🔐 Login
+
+</button>
+
+<p
+id="loginMessage"
+style="
+color:#b91c1c;
+text-align:center;
+margin-top:12px;
+">
+</p>
+
+<div class="help-number">
+
+Need Help?
+
+<br>
+
+Customer Care:
+<span>8081540626</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+APP
+===================================================== -->
+
+<div id="app" class="hidden">
+
+<header>
+
+<div class="logo">
+🍽️ <span>Special Custom</span>
+</div>
+
+<nav id="mainNav">
+
+<button
+id="customerNav"
+onclick="showPage('customer')">
+Customer
+</button>
+
+<button
+id="adminNav"
+onclick="showPage('admin')">
+Admin
+</button>
+
+<button
+id="ownerNav"
+onclick="showPage('owner')">
+Owner
+</button>
+
+<button
+onclick="logout()">
+Logout
+</button>
+
+</nav>
+
+</header>
+
+
+<!-- =====================================================
+CUSTOMER
+===================================================== -->
+
+<main
+id="customerPage"
+class="container">
+
+<div class="brand-card">
+
+<img
+id="customerBanner"
+class="banner"
+src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4">
+
+<div class="brand-content">
+
+<img
+id="customerLogo"
+class="restaurant-logo"
+src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+
+<div>
+
+<div
+id="restaurantTitle"
+class="restaurant-name">
+Special Custom Restaurant
+</div>
+
+<div
+id="restaurantDetails"
+class="restaurant-details">
+Digital QR Menu
+</div>
+
+<span
+id="restaurantStatus"
+class="status open">
+● Open
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="schedule-box">
+
+<h3>🕐 Restaurant Timing</h3>
+
+<p id="scheduleMessage">
+आज के लिए उपलब्ध समय देखें।
+</p>
+
+<div
+id="scheduleList"
+class="schedule-list">
+</div>
+
+</div>
+
+
+<input
+class="search"
+id="search"
+placeholder="🔎 Search food..."
+oninput="renderMenu()">
+
+
+<div
+class="categories"
+id="categories">
+</div>
+
+
+<div
+class="grid"
+id="menu">
+</div>
+
+</main>
+
+
+<button
+id="myOrdersFloatBtn"
+class="cart"
+style="bottom:72px"
+onclick="openMyOrders()">
+
+📋 My Orders
+
+</button>
+
+<button
+id="cartFloatBtn"
+class="cart"
+onclick="openCart()">
+
+🛒 Cart
+(<span id="cartCount">0</span>)
+
+</button>
+
+
+<!-- =====================================================
+ADMIN
+===================================================== -->
+
+<main
+id="adminPage"
+class="container hidden">
+
+
+<div class="section">
+
+<h2>🏪 Restaurant Branding</h2>
+
+<p style="color:#777">
+Admin केवल अपने restaurant की branding manage कर सकता है।
+</p>
+
+<br>
+
+<div class="form-group">
+
+<label>Restaurant Name</label>
+
+<input
+id="restaurantNameInput">
+
+</div>
+
+<div class="form-group">
+
+<label>Restaurant Details</label>
+
+<textarea
+id="restaurantDetailsInput">
+</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>Banner Upload</label>
+
+<input
+id="bannerFile"
+type="file"
+accept="image/*"
+onchange="uploadBanner(event)">
+
+</div>
+
+<div class="form-group">
+
+<label>Banner URL</label>
+
+<input
+id="bannerUrl">
+</div>
+
+<div class="form-group">
+
+<label>Logo Upload</label>
+
+<input
+id="logoFile"
+type="file"
+accept="image/*"
+onchange="uploadLogo(event)">
+
+</div>
+
+<div class="form-group">
+
+<label>Logo URL</label>
+
+<input
+id="logoUrl">
+</div>
+
+<button
+class="gold"
+onclick="saveRestaurantProfile()">
+
+💾 Save Branding
+
+</button>
+
+
+<div class="brand-preview">
+
+<img
+id="previewBanner">
+
+<div class="preview-content">
+
+<img
+id="previewLogo"
+class="preview-logo">
+
+<div>
+
+<b id="previewName"></b>
+
+<p id="previewDetails"></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACCOUNT -->
+
+<div class="section">
+
+<h3>🔐 Restaurant Account</h3>
+
+<br>
+
+<p>
+Restaurant ID:
+<b id="adminId"></b>
+</p>
+
+<p>
+Admin ID:
+<b id="adminLoginId"></b>
+</p>
+
+<p>
+Menu URL:
+<b id="adminUrl"></b>
+</p>
+
+<p style="color:#777;margin-top:8px">
+QR में इसी URL का इस्तेमाल करें। Table के लिए अंत में
+<code>&amp;table=12</code> जोड़ सकते हैं।
+</p>
+
+</div>
+
+
+<!-- WEEKLY SCHEDULE -->
+
+<div class="section">
+
+<h3>📅 Weekly Restaurant Schedule</h3>
+
+<p style="color:#777">
+Admin restaurant की opening timing बदल सकता है।
+</p>
+
+<br>
+
+<div id="weeklyEditor"></div>
+
+<button
+class="gold"
+onclick="saveWeeklySchedule()">
+
+💾 Save Schedule
+
+</button>
+
+</div>
+
+
+<!-- GST -->
+
+<div class="section">
+
+<h3>🧾 GST & Billing</h3>
+
+<br>
+
+<div class="form-group">
+
+<label>GST</label>
+
+<select id="gstEnabled">
+
+<option value="yes">
+Enabled
+</option>
+
+<option value="no">
+Disabled
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>GST Percentage</label>
+
+<input
+id="gstRate"
+type="number"
+min="0"
+max="100">
+
+</div>
+
+<div class="form-group">
+
+<label>GSTIN</label>
+
+<input
+id="gstin"
+placeholder="Optional">
+
+</div>
+
+<button
+class="primary"
+onclick="saveGST()">
+
+Save GST
+
+</button>
+
+</div>
+
+
+<!-- ADD FOOD -->
+
+<div class="section">
+
+<h3>🍴 Add Menu Item</h3>
+
+<br>
+
+<div class="form-group">
+
+<label>Food Name</label>
+
+<input
+id="foodName"
+placeholder="Paneer Tikka">
+
+</div>
+
+<div class="form-group">
+
+<label>Description</label>
+
+<input
+id="foodDesc"
+placeholder="Delicious paneer tikka">
+
+</div>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<input
+id="foodCategory"
+placeholder="Starter">
+
+</div>
+
+<div class="form-group">
+
+<label>Price</label>
+
+<input
+id="foodPrice"
+type="number"
+min="0"
+placeholder="199">
+
+</div>
+
+<div class="form-group">
+
+<label>Food Photo</label>
+
+<input
+id="foodFile"
+type="file"
+accept="image/*"
+onchange="uploadFoodImage(event)">
+
+</div>
+
+<div class="form-group">
+
+<label>Image URL</label>
+
+<input
+id="foodImage"
+placeholder="https://...">
+
+</div>
+
+<button
+class="gold"
+onclick="addFood()">
+
+➕ Add Food
+
+</button>
+
+</div>
+
+
+<!-- MENU MANAGEMENT -->
+
+<div class="section">
+
+<h3>📋 Menu Management</h3>
+
+<div id="adminMenu"></div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div class="section">
+
+<h3>🔔 Orders</h3>
+
+<div id="orders"></div>
+
+</div>
+
+
+<div class="admin-care">
+
+Need Help?
+
+<br>
+
+Customer Care:
+<span>8081540626</span>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+OWNER
+===================================================== -->
+
+<main
+id="ownerPage"
+class="container hidden">
+
+<div class="section">
+
+<h2>👑 Main Owner Dashboard</h2>
+
+<p>
+Special Custom Control Center
+</p>
+
+</div>
+
+
+<div class="stat-grid">
+
+<div class="stat">
+
+<h3>Total Restaurants</h3>
+
+<h2 id="totalRestaurants">
+0
+</h2>
+
+</div>
+
+<div class="stat">
+
+<h3>Active</h3>
+
+<h2 id="activeRestaurants">
+0
+</h2>
+
+</div>
+
+<div class="stat">
+
+<h3>Frozen</h3>
+
+<h2 id="frozenRestaurants">
+0
+</h2>
+
+</div>
+
+</div>
+
+
+<!-- CREATE RESTAURANT -->
+
+<div class="section">
+
+<h3>➕ Create Restaurant</h3>
+
+<br>
+
+<div class="form-group">
+
+<label>Restaurant Name</label>
+
+<input
+id="newRestaurantName"
+placeholder="My Restaurant">
+
+</div>
+
+<div class="form-group">
+
+<label>Admin Login ID</label>
+
+<input
+id="newRestaurantAdmin"
+placeholder="restaurant01">
+
+</div>
+
+<div class="form-group">
+
+<label>Admin Password</label>
+
+<input
+id="newRestaurantPassword"
+type="password"
+placeholder="Password">
+
+</div>
+
+<div class="form-group">
+
+<label>Admin Email (secure Auth के लिए)</label>
+
+<input
+id="newRestaurantEmail"
+type="email"
+placeholder="restaurant@gmail.com">
+
+</div>
+
+<button
+class="gold"
+onclick="createRestaurant()">
+
+Create Restaurant
+
+</button>
+
+</div>
+
+
+<!-- RESTAURANTS -->
+
+<div class="section">
+
+<h3>🏪 Restaurant Accounts</h3>
+
+<input
+class="search"
+id="restaurantSearch"
+placeholder="Search restaurant..."
+oninput="renderRestaurants()">
+
+<div id="restaurants"></div>
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+CART
+===================================================== -->
+
+<div
+class="modal"
+id="cartModal">
+
+<div class="modal-box">
+
+<h2>🛒 Your Cart</h2>
+
+<br>
+
+<div id="cartItems"></div>
+
+<hr>
+
+<br>
+
+<p>
+Subtotal:
+₹<span id="subtotal">0</span>
+</p>
+
+<p>
+GST:
+₹<span id="gstAmount">0</span>
+</p>
+
+<h2>
+Total:
+₹<span id="grandTotal">0</span>
+</h2>
+
+<br>
+
+<div class="form-group">
+
+<label>Customer Name *</label>
+
+<input
+id="customerName"
+placeholder="Enter your name">
+
+</div>
+
+<div class="form-group">
+
+<label>Table Number *</label>
+
+<input
+id="tableNumber"
+placeholder="Example: 12">
+
+</div>
+
+<button
+class="gold"
+onclick="placeOrder()">
+
+Place Order
+
+</button>
+
+<button
+class="secondary"
+onclick="closeModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- BILL -->
+
+<div
+class="modal"
+id="billModal">
+
+<div
+class="modal-box"
+id="billContent">
+</div>
+
+</div>
+
+<!-- MY ORDERS -->
+<div
+class="modal"
+id="myOrdersModal">
+
+<div class="modal-box">
+
+<h2>📋 My Orders</h2>
+
+<p style="color:#777">इस device पर किए गए आपके orders</p>
+
+<div id="myOrdersContent" style="margin-top:15px"></div>
+
+<button
+class="secondary"
+onclick="closeModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+/* =====================================================
+SUPABASE CONFIG
+===================================================== */
+const SUPABASE_URL = "https://atqspsnkjeeehjmvlhjz.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_zRxc8yZ3hWBGW16E-HM8nA_5IfQKQC6";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+// Separate non-persistent client used only to provision Admin Auth users.
+// It never replaces the Owner's active session.
+const authProvisionClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY,
+  { auth:{ persistSession:false, autoRefreshToken:false, detectSessionInUrl:false } }
+);
+
+console.log("Supabase client initialized:", SUPABASE_URL);
+
+/* =====================================================
+DEFAULT
+===================================================== */
+
+const DEFAULT_BANNER =
+"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4";
+
+const DEFAULT_LOGO =
+"https://cdn-icons-png.flaticon.com/512/3075/3075977.png";
+
+
+const DEFAULT_SCHEDULE = {
+
+ Monday:{enabled:true,open:"10:00",close:"22:00"},
+ Tuesday:{enabled:true,open:"10:00",close:"22:00"},
+ Wednesday:{enabled:true,open:"10:00",close:"22:00"},
+ Thursday:{enabled:true,open:"10:00",close:"22:00"},
+ Friday:{enabled:true,open:"10:00",close:"22:00"},
+ Saturday:{enabled:true,open:"10:00",close:"22:00"},
+ Sunday:{enabled:true,open:"10:00",close:"22:00"}
+
+};
+
+
+/* =====================================================
+LOGIN ACCOUNTS
+===================================================== */
+
+/*
+ Supabase Auth अब Owner और Admin login संभालता है।
+ Owner user के Auth metadata में role:"owner" होना चाहिए।
+ Admin user का email उसी restaurant के email से match होगा.
+*/
+
+
+/* =====================================================
+SUPABASE DATA
+===================================================== */
+let restaurants=[];
+let menu=[];
+let orders=[];
+let currentRestaurantId=localStorage.getItem("currentRestaurantId")||"";
+let currentUser=null;
+let loginType="admin";
+let cart=[];
+let actionBusy=false;
+
+function setButtonBusy(button,busy,label){
+ if(!button)return;
+ if(busy){
+  if(!button.dataset.originalText)button.dataset.originalText=button.innerText;
+  button.disabled=true;
+  button.style.opacity=".65";
+  button.innerText=label||"Please wait…";
+ }else{
+  button.disabled=false;
+  button.style.opacity="";
+  if(button.dataset.originalText)button.innerText=button.dataset.originalText;
+ }
+}
+
+function restaurantFromDB(r){
+ if(!r)return null;
+ return {id:r.id,name:r.name||"Special Custom Restaurant",email:r.email||"",
+  adminId:r.admin_id||r.adminid||r.adminId||"",adminPassword:"",
+  details:r.details||"Digital QR Menu",banner:r.banner||DEFAULT_BANNER,logo:r.logo||DEFAULT_LOGO,
+  active:r.active!==false,gstEnabled:r.gst_enabled!==false,gstRate:Number(r.gst_rate??5),gstin:r.gstin||"",
+  schedule:r.schedule||DEFAULT_SCHEDULE,freezeStart:r.freeze_start||"",freezeEnd:r.freeze_end||"",freezeReason:r.freeze_reason||"",created:r.created||r.created_at||""};
+}
+function menuFromDB(x){return {id:x.id,restaurantId:x.restaurant_id,name:x.name,desc:x.description||"",category:x.category||"",price:Number(x.price||0),image:x.image||DEFAULT_BANNER,available:x.available!==false};}
+function orderFromDB(x){return {id:x.id,restaurantId:x.restaurant_id,customer:x.customer,table:x.table_number,items:Array.isArray(x.items)?x.items:[],subtotal:Number(x.subtotal||0),gst:Number(x.gst||0),gstRate:Number(x.gst_rate||0),total:Number(x.total||0),status:String(x.status||"pending").toLowerCase(),date:x.order_date||x.created_at||""};}
+async function loadData(){
+ let lastError=null;
+ for(let attempt=1;attempt<=3;attempt++){
+  try{
+   const [rRes,mRes,oRes]=await Promise.all([
+    supabaseClient.from("restaurants").select("*"),
+    supabaseClient.from("menu").select("*"),
+    supabaseClient.from("orders").select("*")
+   ]);
+   if(rRes.error)throw rRes.error;
+   if(mRes.error)throw mRes.error;
+   if(oRes.error)throw oRes.error;
+   restaurants=(rRes.data||[]).map(restaurantFromDB);
+   menu=(mRes.data||[]).map(menuFromDB);
+   orders=(oRes.data||[]).map(orderFromDB);
+   return;
+  }catch(e){
+   lastError=e;
+   if(attempt<3)await new Promise(resolve=>setTimeout(resolve,500*attempt));
+  }
+ }
+ throw lastError;
+}
+async function saveRestaurant(r){
+ const row={id:r.id,name:r.name,email:r.email,admin_id:r.adminId,details:r.details,banner:r.banner,logo:r.logo,active:r.active,gst_enabled:r.gstEnabled,gst_rate:r.gstRate,gstin:r.gstin,schedule:r.schedule,freeze_start:r.freezeStart||null,freeze_end:r.freezeEnd||null,freeze_reason:r.freezeReason||null};
+
+ // Existing restaurant: UPDATE only.
+ // This avoids an UPSERT triggering the INSERT RLS policy.
+ const exists=restaurants.some(x=>x.id===r.id);
+
+ let result;
+ if(exists){
+  result=await supabaseClient.from("restaurants").update(row).eq("id",r.id);
+ }else{
+  result=await supabaseClient.from("restaurants").insert(row);
+ }
+
+ if(result.error)throw result.error;
+}
+async function saveMenuItem(item){
+ const row={id:item.id,restaurant_id:item.restaurantId,name:item.name,description:item.desc||"",category:item.category,price:item.price,image:item.image||DEFAULT_BANNER,available:item.available};
+ const {error}=await supabaseClient.from("menu").upsert(row,{onConflict:"id"});if(error)throw error;
+}
+async function deleteMenuItem(id){const {error}=await supabaseClient.from("menu").delete().eq("id",id);if(error)throw error;}
+async function saveOrder(order){
+ const row={id:order.id,restaurant_id:order.restaurantId,customer:order.customer,table_number:order.table,items:order.items,subtotal:order.subtotal,gst:order.gst,gst_rate:order.gstRate,total:order.total,status:order.status,order_date:order.date};
+ const {error}=await supabaseClient.from("orders").insert(row);if(error)throw error;
+}
+async function deleteRestaurantData(id){
+ // Delete dependent data first so foreign-key constraints cannot block
+ // deletion of the restaurant itself.
+ const {error:ordersError}=await supabaseClient.from("orders").delete().eq("restaurant_id",id);
+ if(ordersError)throw ordersError;
+ const {error:menuError}=await supabaseClient.from("menu").delete().eq("restaurant_id",id);
+ if(menuError)throw menuError;
+ const {error:restaurantError}=await supabaseClient.from("restaurants").delete().eq("id",id);
+ if(restaurantError)throw restaurantError;
+
+ // RLS can sometimes return no error while deleting 0 rows.
+ const {data:stillThere,error:checkError}=await supabaseClient
+  .from("restaurants").select("id").eq("id",id).limit(1);
+ if(checkError)throw checkError;
+ if((stillThere||[]).length){
+  throw new Error("Restaurant delete नहीं हुआ। Supabase RLS में DELETE policy चाहिए।");
+ }
+}
+function showDBError(error){console.error(error);alert("Supabase error: "+(error?.message||error));}
+
+function saveAll(){ localStorage.setItem("currentRestaurantId",currentRestaurantId||""); }
+
+/* =====================================================
+LOGIN TYPE
+===================================================== */
+
+function selectLoginType(type){
+
+ loginType=type;
+
+ document
+ .getElementById("adminTab")
+ .classList.toggle(
+  "active",
+  type==="admin"
+ );
+
+ document
+ .getElementById("ownerTab")
+ .classList.toggle(
+  "active",
+  type==="owner"
+ );
+
+ document.getElementById(
+  "loginMessage"
+ ).innerText="";
+
+}
+
+
+/* =====================================================
+ADMIN AUTH HELPERS
+===================================================== */
+
+function adminAuthEmail(restaurantId){
+ return `admin_${String(restaurantId).replace(/-/g,"")}@auth.specialcustom.local`;
+}
+
+async function ensureAdminAuthUser(restaurant,password){
+ const email=adminAuthEmail(restaurant.id);
+ const {data,error}=await authProvisionClient.auth.signUp({
+  email,
+  password,
+  options:{data:{role:"admin",restaurant_id:restaurant.id,admin_id:restaurant.adminId}}
+ });
+
+ // If the user already exists, sign-up may report an error. We can still
+ // authenticate with the same synthetic Auth email + supplied password.
+ if(error && !/already registered|already exists|user already/i.test(error.message||"")){
+  throw error;
+ }
+
+ // With email confirmation enabled Supabase does not return a usable session.
+ // This app intentionally uses synthetic Auth emails for Admin IDs, so email
+ // confirmation is not part of the Admin login flow.
+ if(!data?.session){
+  const {error:signInError}=await authProvisionClient.auth.signInWithPassword({email,password});
+  if(signInError){
+   throw new Error("Admin Auth account create/login नहीं हो पाया। Supabase में Authentication → Sign In / Providers → Confirm email को OFF करके Save changes करें, फिर दोबारा login करें।");
+  }
+ }
+ return email;
+}
+
+/* =====================================================
+LOGIN
+===================================================== */
+
+async function login(){
+ let id=document.getElementById("loginId").value.trim();
+ let password=document.getElementById("loginPassword").value;
+ let msg=document.getElementById("loginMessage");
+ if(!id || !password){msg.innerText="Login ID और Password भरें।";return;}
+ try{
+  let email=id, restaurant=null;
+
+  if(loginType==="admin"){
+   restaurant=restaurants.find(r=>r.adminId===id);
+   if(!restaurant){msg.innerText="Admin Login ID नहीं मिला।";return;}
+
+   // Existing restaurants may still have the old DB password. On first login,
+   // provision a real Supabase Auth user using that password.
+   email=adminAuthEmail(restaurant.id);
+   await ensureAdminAuthUser(restaurant,password);
+  }
+
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error)throw error;
+  const user=data.user;
+  if(!user)throw new Error("Supabase Auth user नहीं मिला।");
+
+  if(loginType==="owner"){
+   if(user.user_metadata?.role!=="owner"){
+    await supabaseClient.auth.signOut();
+    msg.innerText="यह Auth account Owner के लिए configured नहीं है।";return;
+   }
+   currentUser={type:"owner",authUserId:user.id,email:user.email||email};
+  }else{
+   if(!restaurant || user.user_metadata?.restaurant_id!==restaurant.id){
+    await supabaseClient.auth.signOut();
+    msg.innerText="यह Admin account इस restaurant से match नहीं करता।";return;
+   }
+   currentUser={type:"admin",restaurantId:restaurant.id,authUserId:user.id,email:user.email||email};
+   currentRestaurantId=restaurant.id;
+   localStorage.setItem("currentRestaurantId",currentRestaurantId);
+  }
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  setupNavigation();
+  showPage(loginType==="owner"?"owner":"admin");
+  msg.innerText="";
+ }catch(e){
+  console.error("Supabase Auth login error:",e);
+  msg.innerText="Login failed: "+(e?.message||e);
+ }
+}
+
+/* =====================================================
+NAVIGATION
+===================================================== */
+
+function setupNavigation(){
+
+ let adminNav =
+ document.getElementById(
+  "adminNav"
+ );
+
+ let ownerNav =
+ document.getElementById(
+  "ownerNav"
+ );
+
+ let customerNav =
+ document.getElementById(
+  "customerNav"
+ );
+
+
+ if(currentUser.type==="owner"){
+
+  ownerNav.classList.remove("hidden");
+
+  adminNav.classList.add("hidden");
+
+  customerNav.classList.add("hidden");
+
+  // Owner dashboard should not show customer-only controls.
+  const myOrdersBtn=document.getElementById("myOrdersFloatBtn");
+  const cartBtn=document.getElementById("cartFloatBtn");
+  if(myOrdersBtn)myOrdersBtn.style.display="none";
+  if(cartBtn)cartBtn.style.display="none";
+
+ }
+
+
+ if(currentUser.type==="admin"){
+
+  ownerNav.classList.add("hidden");
+
+  adminNav.classList.remove("hidden");
+
+  customerNav.classList.remove("hidden");
+
+  const myOrdersBtn=document.getElementById("myOrdersFloatBtn");
+  const cartBtn=document.getElementById("cartFloatBtn");
+  if(myOrdersBtn)myOrdersBtn.style.display="block";
+  if(cartBtn)cartBtn.style.display="block";
+
+ }
+
+}
+
+
+/* =====================================================
+LOGOUT
+===================================================== */
+
+async function logout(){
+ try{await supabaseClient.auth.signOut();}catch(e){console.error(e);}
+ currentUser=null;cart=[];
+ document.getElementById("app").classList.add("hidden");
+ document.getElementById("loginPage").classList.remove("hidden");
+ document.getElementById("loginId").value="";
+ document.getElementById("loginPassword").value="";
+ document.getElementById("loginMessage").innerText="";
+}
+
+/* =====================================================
+RESTAURANT
+===================================================== */
+
+function getRestaurant(){
+
+ let params =
+ new URLSearchParams(
+  window.location.search
+ );
+
+ let urlRestaurantId =
+ params.get("restaurant");
+
+ if(urlRestaurantId){
+
+  let urlRestaurant =
+  restaurants.find(
+   r=>r.id===urlRestaurantId
+  );
+
+  if(urlRestaurant){
+
+   currentRestaurantId =
+   urlRestaurantId;
+
+   return urlRestaurant;
+
+  }
+
+ }
+
+ return restaurants.find(
+  r=>r.id===currentRestaurantId
+ ) || restaurants[0];
+
+}
+
+
+/* =====================================================
+FREEZE
+===================================================== */
+
+function isFrozen(r){
+
+ if(
+  !r.freezeStart ||
+  !r.freezeEnd
+ ){
+
+  return false;
+
+ }
+
+ let now=new Date();
+
+ let start=
+ new Date(r.freezeStart);
+
+ let end=
+ new Date(r.freezeEnd);
+
+ return now>=start && now<=end;
+
+}
+
+
+/* =====================================================
+DAY
+===================================================== */
+
+function getDayName(){
+
+ return [
+
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+
+ ][new Date().getDay()];
+
+}
+
+
+function getTodaySchedule(r){
+
+ let day=getDayName();
+
+ return r.schedule &&
+ r.schedule[day]
+ ?
+ r.schedule[day]
+ :
+ {
+  enabled:false,
+  open:"10:00",
+  close:"22:00"
+ };
+
+}
+
+
+/* =====================================================
+STATE
+===================================================== */
+
+function getRestaurantState(r){
+
+ if(isFrozen(r)){
+
+  return "freeze";
+
+ }
+
+ if(!r.active){
+
+  return "freeze";
+
+ }
+
+ let today=
+ getTodaySchedule(r);
+
+ if(!today.enabled){
+
+  return "closed";
+
+ }
+
+ let now=new Date();
+
+ let current =
+ String(now.getHours())
+ .padStart(2,"0")
+ +":"
+ +String(now.getMinutes())
+ .padStart(2,"0");
+
+
+ const open=today.open;
+ const close=today.close;
+ if(open===close)return "open";
+ if(open<close){
+  return current>=open && current<=close ? "open" : "closed";
+ }
+ // Schedule crosses midnight, e.g. 18:00 - 02:00.
+ return current>=open || current<=close ? "open" : "closed";
+
+}
+
+
+/* =====================================================
+PAGE
+===================================================== */
+
+function showPage(page){
+
+ document.getElementById(
+  "customerPage"
+ ).classList.toggle(
+  "hidden",
+  page!=="customer"
+ );
+
+ document.getElementById(
+  "adminPage"
+ ).classList.toggle(
+  "hidden",
+  page!=="admin"
+ );
+
+ document.getElementById(
+  "ownerPage"
+ ).classList.toggle(
+  "hidden",
+  page!=="owner"
+ );
+
+
+ if(page==="customer"){
+
+  renderMenu();
+
+ }
+
+
+ if(page==="admin"){
+
+  if(
+   currentUser.type!=="admin"
+  ){
+
+   return;
+
+  }
+
+  currentRestaurantId =
+  currentUser.restaurantId;
+
+  renderAdmin();
+
+ }
+
+
+ if(page==="owner"){
+
+  if(
+   currentUser.type!=="owner"
+  ){
+
+   return;
+
+  }
+
+  renderOwner();
+
+ }
+
+}
+
+
+/* =====================================================
+CUSTOMER MENU
+===================================================== */
+
+function renderMenu(){
+
+ let r=getRestaurant();
+
+ if(!r)return;
+
+
+ document.getElementById(
+  "restaurantTitle"
+ ).innerText=r.name;
+
+
+ document.getElementById(
+  "restaurantDetails"
+ ).innerText=r.details;
+
+
+ document.getElementById(
+  "customerBanner"
+ ).src=
+ r.banner||DEFAULT_BANNER;
+
+
+ document.getElementById(
+  "customerLogo"
+ ).src=
+ r.logo||DEFAULT_LOGO;
+
+
+ let state=
+ getRestaurantState(r);
+
+
+ let status=
+ document.getElementById(
+  "restaurantStatus"
+ );
+
+
+ if(state==="open"){
+
+  status.className="status open";
+
+  status.innerText="● Open";
+
+ }
+
+ else if(state==="freeze"){
+
+  status.className="status freeze";
+
+  status.innerText=
+  "● Temporarily Closed";
+
+ }
+
+ else{
+
+  status.className="status closed";
+
+  status.innerText="● Closed";
+
+ }
+
+
+ renderCustomerSchedule(r);
+
+
+ let search =
+ document.getElementById(
+  "search"
+ ).value
+ .toLowerCase();
+
+
+ let restaurantMenu =
+ menu.filter(
+  item =>
+   item.restaurantId===r.id
+ );
+
+
+ let categories=[
+  "All",
+  ...new Set(
+   restaurantMenu.map(
+    x=>x.category
+   )
+  )
+ ];
+
+
+ document.getElementById(
+  "categories"
+ ).innerHTML=
+
+ categories.map(
+  c=>`
+
+  <button
+  onclick="filterCategory('${c}')">
+
+  ${c}
+
+  </button>
+
+  `
+ ).join("");
+
+
+ if(isFrozen(r)){
+
+  document.getElementById(
+   "menu"
+  ).innerHTML=`
+
+  <div class="section"
+  style="
+   grid-column:1/-1;
+   text-align:center
+  ">
+
+   <h2>🔒 Restaurant Currently Closed</h2>
+
+   <p style="
+    margin-top:10px;
+    color:#777
+   ">
+
+   ${
+    r.freezeReason ||
+    "Restaurant इस समय उपलब्ध नहीं है।"
+   }
+
+   </p>
+
+  </div>
+
+  `;
+
+  return;
+
+ }
+
+
+ let filtered =
+ restaurantMenu.filter(
+  item =>
+   item.available &&
+   (
+    item.name
+    .toLowerCase()
+    .includes(search)
+
+    ||
+
+    item.category
+    .toLowerCase()
+    .includes(search)
+   )
+ );
+
+
+ document.getElementById(
+  "menu"
+ ).innerHTML=
+
+ filtered.map(
+  item=>`
+
+  <div class="card">
+
+   <img src="${item.image}" onerror="this.src='${DEFAULT_BANNER}'">
+
+   <div class="card-body">
+
+    <h3>${item.name}</h3>
+
+    <p class="desc">
+    ${item.desc}
+    </p>
+
+    <p class="price">
+    ₹${item.price}
+    </p>
+
+    <button
+    class="add"
+    onclick="addToCart(${item.id})">
+
+    Add to Cart
+
+    </button>
+
+   </div>
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+/* =====================================================
+SCHEDULE DISPLAY
+===================================================== */
+
+function renderCustomerSchedule(r){
+
+ let today=
+ getTodaySchedule(r);
+
+
+ document.getElementById(
+  "scheduleMessage"
+ ).innerText=
+
+ isFrozen(r)
+
+ ?
+ (
+  r.freezeReason ||
+  "Restaurant temporarily closed."
+ )
+
+ :
+
+ (
+  "आज: "+
+  getDayName()+
+  " • "+
+  (
+   today.enabled
+   ?
+   today.open+
+   " - "+
+   today.close
+   :
+   "Closed"
+  )
+ );
+
+
+ document.getElementById(
+  "scheduleList"
+ ).innerHTML=
+
+ Object.entries(
+  r.schedule||{}
+ ).map(
+  ([day,x])=>`
+
+  <div class="day-box">
+
+   <strong>${day}</strong>
+
+   ${
+    x.enabled
+    ?
+    x.open+" - "+x.close
+    :
+    "Closed"
+   }
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+/* =====================================================
+ADMIN
+===================================================== */
+
+function renderAdmin(){
+
+ let r=getRestaurant();
+
+ if(!r)return;
+
+
+ document.getElementById(
+  "restaurantNameInput"
+ ).value=r.name;
+
+ document.getElementById(
+  "restaurantDetailsInput"
+ ).value=r.details;
+
+ document.getElementById(
+  "bannerUrl"
+ ).value=r.banner||"";
+
+ document.getElementById(
+  "logoUrl"
+ ).value=r.logo||"";
+
+
+ document.getElementById(
+  "adminId"
+ ).innerText=r.id;
+
+ document.getElementById(
+  "adminLoginId"
+ ).innerText=r.adminId;
+
+ document.getElementById(
+ "adminUrl"
+).innerText=
+getMenuURL(r.id);
+
+
+ document.getElementById(
+  "gstEnabled"
+ ).value=
+ r.gstEnabled
+ ?"yes"
+ :"no";
+
+ document.getElementById(
+  "gstRate"
+ ).value=
+ r.gstRate;
+
+ document.getElementById(
+  "gstin"
+ ).value=
+ r.gstin||"";
+
+
+ renderWeeklyEditor(r);
+
+ updateBrandPreview();
+
+ renderAdminMenu();
+
+ renderOrders();
+
+}
+
+
+/* =====================================================
+BRANDING
+===================================================== */
+
+function uploadBanner(event){
+
+ let file=
+ event.target.files[0];
+
+ if(!file)return;
+
+ if(
+  file.size >
+  3*1024*1024
+ ){
+
+  alert(
+   "Banner 3MB से छोटी रखें।"
+  );
+
+  return;
+
+ }
+
+
+ let reader=
+ new FileReader();
+
+ reader.onload=e=>{
+
+  document.getElementById(
+   "bannerUrl"
+  ).value=
+  e.target.result;
+
+  document.getElementById(
+   "previewBanner"
+  ).src=
+  e.target.result;
+
+ };
+
+ reader.readAsDataURL(file);
+
+}
+
+
+function uploadLogo(event){
+
+ let file=
+ event.target.files[0];
+
+ if(!file)return;
+
+ if(
+  file.size >
+  2*1024*1024
+ ){
+
+  alert(
+   "Logo 2MB से छोटी रखें।"
+  );
+
+  return;
+
+ }
+
+
+ let reader=
+ new FileReader();
+
+ reader.onload=e=>{
+
+  document.getElementById(
+   "logoUrl"
+  ).value=
+  e.target.result;
+
+  document.getElementById(
+   "previewLogo"
+  ).src=
+  e.target.result;
+
+ };
+
+ reader.readAsDataURL(file);
+
+}
+
+
+async function uploadFoodImage(event){
+
+ let file=
+ event.target.files[0];
+
+ if(!file)return;
+
+ // Automatically compress the food image so it stays safely below 2MB.
+ // The original image is not modified on the phone; only the uploaded copy is compressed.
+ try{
+
+  const maxBytes = 1.8 * 1024 * 1024;
+  const compressed = await compressFoodImage(file, maxBytes);
+
+  document.getElementById(
+   "foodImage"
+  ).value = compressed;
+
+  const originalMB = (file.size / 1024 / 1024).toFixed(2);
+  const compressedMB = (compressed.length * 0.75 / 1024 / 1024).toFixed(2);
+
+  alert(
+   `Image compressed successfully.\nOriginal: ${originalMB} MB\nCompressed: about ${compressedMB} MB`
+  );
+
+ }catch(error){
+
+  console.error(error);
+  alert("Image compress नहीं हो पाई। दूसरी JPG/JPEG image try करें।");
+
+ }
+
+}
+
+
+function compressFoodImage(file, maxBytes){
+
+ return new Promise((resolve,reject)=>{
+
+  const reader = new FileReader();
+
+  reader.onerror = () => reject(new Error("Could not read image"));
+
+  reader.onload = () => {
+
+   const img = new Image();
+
+   img.onerror = () => reject(new Error("Invalid image"));
+
+   img.onload = async () => {
+
+    try{
+
+     // Start with a phone-friendly maximum resolution.
+     let maxDimension = 1280;
+     let scale = Math.min(1, maxDimension / Math.max(img.width, img.height));
+     let width = Math.max(1, Math.round(img.width * scale));
+     let height = Math.max(1, Math.round(img.height * scale));
+
+     for(let attempt=0; attempt<6; attempt++){
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d", {alpha:false});
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0,0,width,height);
+      ctx.drawImage(img,0,0,width,height);
+
+      let quality = 0.82;
+
+      for(let q=0; q<7; q++){
+
+       const dataUrl = canvas.toDataURL("image/jpeg", quality);
+       const bytes = Math.ceil((dataUrl.length - dataUrl.indexOf(",") - 1) * 3 / 4);
+
+       if(bytes <= maxBytes){
+        resolve(dataUrl);
+        return;
+       }
+
+       quality -= 0.07;
+
+      }
+
+      // If quality alone is not enough, reduce dimensions and try again.
+      width = Math.max(480, Math.round(width * 0.75));
+      height = Math.max(480, Math.round(height * 0.75));
+
+     }
+
+     reject(new Error("Image is too large to compress"));
+
+    }catch(e){
+     reject(e);
+    }
+
+   };
+
+   img.src = reader.result;
+
+  };
+
+  reader.readAsDataURL(file);
+
+ });
+
+}
+
+
+async function saveRestaurantProfile(){
+
+ let r=getRestaurant();
+
+ r.name=
+ document.getElementById(
+  "restaurantNameInput"
+ ).value.trim();
+
+ r.details=
+ document.getElementById(
+  "restaurantDetailsInput"
+ ).value.trim();
+
+ r.banner=
+ document.getElementById(
+  "bannerUrl"
+ ).value.trim()
+ ||
+ DEFAULT_BANNER;
+
+ r.logo=
+ document.getElementById(
+  "logoUrl"
+ ).value.trim()
+ ||
+ DEFAULT_LOGO;
+
+
+ if(!r.name){
+
+  alert(
+   "Restaurant name required."
+  );
+
+  return;
+
+ }
+
+
+ try{
+  await saveRestaurant(r);
+  await loadData();
+  updateBrandPreview();
+  renderMenu();
+  alert("Branding successfully saved.");
+ }catch(e){showDBError(e);}
+
+
+}
+
+
+function updateBrandPreview(){
+
+ let r=getRestaurant();
+
+ document.getElementById(
+  "previewBanner"
+ ).src=r.banner;
+
+ document.getElementById(
+  "previewLogo"
+ ).src=r.logo;
+
+ document.getElementById(
+  "previewName"
+ ).innerText=r.name;
+
+ document.getElementById(
+  "previewDetails"
+ ).innerText=r.details;
+
+}
+
+
+/* =====================================================
+WEEKLY
+===================================================== */
+
+function renderWeeklyEditor(r){
+
+ let days=[
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+ ];
+
+
+ document.getElementById(
+  "weeklyEditor"
+ ).innerHTML=
+
+ days.map(
+  day=>{
+
+   let x=
+   r.schedule &&
+   r.schedule[day]
+   ?
+   r.schedule[day]
+   :
+   {
+    enabled:false,
+    open:"10:00",
+    close:"22:00"
+   };
+
+
+   return `
+
+   <div style="
+    padding:12px;
+    border-bottom:1px solid #eee
+   ">
+
+   <b>${day}</b>
+
+   <br><br>
+
+   <label>
+
+   <input
+   type="checkbox"
+   id="day_${day}"
+   ${x.enabled?"checked":""}>
+
+   Open
+
+   </label>
+
+   <input
+   type="time"
+   id="open_${day}"
+   value="${x.open}"
+   style="
+    padding:8px;
+    margin-left:10px
+   ">
+
+   <input
+   type="time"
+   id="close_${day}"
+   value="${x.close}"
+   style="
+    padding:8px;
+    margin-left:5px
+   ">
+
+   </div>
+
+   `;
+
+  }
+ ).join("");
+
+}
+
+
+async function saveWeeklySchedule(){
+
+ let r=getRestaurant();
+
+ let days=[
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday"
+ ];
+
+
+ r.schedule={};
+
+
+ days.forEach(
+  day=>{
+
+   r.schedule[day]={
+
+    enabled:
+    document.getElementById(
+     "day_"+day
+    ).checked,
+
+    open:
+    document.getElementById(
+     "open_"+day
+    ).value,
+
+    close:
+    document.getElementById(
+     "close_"+day
+    ).value
+
+   };
+
+  }
+ );
+
+
+ try{await saveRestaurant(r);await loadData();}catch(e){showDBError(e);return;}
+
+ renderCustomerSchedule(r);
+ renderCustomerStatusSafe(r);
+
+ alert(
+  "Weekly schedule saved."
+ );
+
+}
+
+
+function renderCustomerStatusSafe(r){
+
+ let state=
+ getRestaurantState(r);
+
+ let el=
+ document.getElementById(
+  "restaurantStatus"
+ );
+
+ if(state==="open"){
+
+  el.className="status open";
+
+  el.innerText="● Open";
+
+ }
+ else if(state==="freeze"){
+
+  el.className="status freeze";
+
+  el.innerText=
+  "● Temporarily Closed";
+
+ }
+ else{
+
+  el.className="status closed";
+
+  el.innerText="● Closed";
+
+ }
+
+}
+
+
+/* =====================================================
+GST
+===================================================== */
+
+async function saveGST(){
+
+ let r=getRestaurant();
+
+ let rate=
+ Number(
+  document.getElementById(
+   "gstRate"
+  ).value
+ );
+
+
+ if(
+  rate<0 ||
+  rate>100
+ ){
+
+  alert(
+   "GST 0 से 100 के बीच रखें।"
+  );
+
+  return;
+
+ }
+
+
+ r.gstEnabled=
+ document.getElementById(
+  "gstEnabled"
+ ).value==="yes";
+
+ r.gstRate=rate;
+
+ r.gstin=
+ document.getElementById(
+  "gstin"
+ ).value.trim();
+
+
+ try{await saveRestaurant(r);await loadData();}catch(e){showDBError(e);return;}
+
+ updateCart();
+ alert(
+   "GST settings saved."
+ );
+
+}
+
+
+/* =====================================================
+FOOD
+===================================================== */
+
+async function addFood(){
+
+ let r=getRestaurant();
+
+ let name=
+ document.getElementById(
+  "foodName"
+ ).value.trim();
+
+ let desc=
+ document.getElementById(
+  "foodDesc"
+ ).value.trim();
+
+ let category=
+ document.getElementById(
+  "foodCategory"
+ ).value.trim();
+
+ let price=
+ Number(
+  document.getElementById(
+   "foodPrice"
+  ).value
+ );
+
+ let image=
+ document.getElementById(
+  "foodImage"
+ ).value.trim();
+
+
+ if(
+  !name ||
+  !category ||
+  price<0
+ ){
+
+  alert(
+   "Food name, category और price भरें।"
+  );
+
+  return;
+
+ }
+
+
+ const item={id:Date.now(),restaurantId:r.id,name:name,desc:desc,category:category,price:price,image:image||DEFAULT_BANNER,available:true};
+ try{await saveMenuItem(item);menu.push(item);}catch(e){showDBError(e);return;}
+
+
+ document.getElementById(
+  "foodName"
+ ).value="";
+
+ document.getElementById(
+  "foodDesc"
+ ).value="";
+
+ document.getElementById(
+  "foodCategory"
+ ).value="";
+
+ document.getElementById(
+  "foodPrice"
+ ).value="";
+
+ document.getElementById(
+  "foodImage"
+ ).value="";
+
+
+ renderAdminMenu();
+
+ renderMenu();
+
+}
+
+
+function renderAdminMenu(){
+
+ let r=getRestaurant();
+
+ let restaurantMenu=
+ menu.filter(
+  x=>x.restaurantId===r.id
+ );
+
+
+ if(!restaurantMenu.length){
+
+  document.getElementById(
+   "adminMenu"
+  ).innerHTML=
+  "<p>No menu items yet.</p>";
+
+  return;
+
+ }
+
+
+ document.getElementById(
+  "adminMenu"
+ ).innerHTML=
+
+ restaurantMenu.map(
+  item=>`
+
+  <div class="admin-food">
+
+   <div style="
+    display:flex;
+    gap:10px;
+    align-items:center
+   ">
+
+    <img
+    class="admin-food-img"
+    src="${item.image}">
+
+    <div>
+
+     <b>${item.name}</b>
+
+     <br>
+
+     ₹${item.price}
+     • ${item.category}
+
+     <br>
+
+     ${
+      item.available
+      ?
+      "🟢 Available"
+      :
+      "🔴 Unavailable"
+     }
+
+    </div>
+
+   </div>
+
+   <div>
+
+    <button
+    class="${
+     item.available
+     ?
+     "danger"
+     :
+     "success"
+    }"
+    onclick="toggleFood(${item.id})">
+
+    ${
+     item.available
+     ?
+     "Disable"
+     :
+     "Enable"
+    }
+
+    </button>
+
+    <button
+    class="danger"
+    onclick="deleteFood(${item.id})">
+
+    Delete
+
+    </button>
+
+   </div>
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+async function toggleFood(id){
+
+ let item=
+ menu.find(
+  x=>x.id===id
+ );
+
+ if(!item)return;
+
+ item.available=!item.available;
+ try{await saveMenuItem(item);await loadData();}catch(e){showDBError(e);return;}
+ renderAdminMenu();
+ renderMenu();
+
+}
+
+
+async function deleteFood(id){
+
+ if(!confirm(
+  "Delete this food item?"
+ ))return;
+
+
+ try{await deleteMenuItem(id);menu=menu.filter(x=>x.id!==id);}catch(e){showDBError(e);return;}
+
+ renderAdminMenu();
+
+ renderMenu();
+
+}
+
+
+/* =====================================================
+CATEGORY
+===================================================== */
+
+function filterCategory(category){
+
+ document.getElementById(
+  "search"
+ ).value=
+ category==="All"
+ ?""
+ :category;
+
+ renderMenu();
+
+}
+
+
+/* =====================================================
+CART
+===================================================== */
+
+function addToCart(id){
+
+ let r=getRestaurant();
+
+ if(
+  isFrozen(r) ||
+  getRestaurantState(r)!=="open"
+ ){
+
+  alert(
+   "Restaurant अभी order नहीं ले रहा है।"
+  );
+
+  return;
+
+ }
+
+
+ let item=
+ menu.find(
+  x=>
+   x.id===id &&
+   x.restaurantId===r.id
+ );
+
+
+ if(!item)return;
+
+
+ let existing=
+ cart.find(
+  x=>x.id===id
+ );
+
+
+ if(existing){
+
+  existing.qty++;
+
+ }
+ else{
+
+  cart.push({
+   ...item,
+   qty:1
+  });
+
+ }
+
+
+ updateCart();
+
+}
+
+
+function updateCart(){
+
+ document.getElementById(
+  "cartCount"
+ ).innerText=
+
+ cart.reduce(
+  (sum,x)=>sum+x.qty,
+  0
+ );
+
+
+ let html="";
+
+
+ cart.forEach(
+  item=>{
+
+   html+=`
+
+   <div class="cart-item">
+
+    <div>
+
+     <b>${item.name}</b>
+
+     <br>
+
+     ₹${item.price}
+     × ${item.qty}
+
+    </div>
+
+    <div class="qty">
+
+     <button
+     onclick="changeQty(${item.id},-1)">
+     −
+     </button>
+
+     ${item.qty}
+
+     <button
+     onclick="changeQty(${item.id},1)">
+     +
+     </button>
+
+    </div>
+
+   </div>
+
+   `;
+
+  }
+ );
+
+
+ document.getElementById(
+  "cartItems"
+ ).innerHTML=
+ html ||
+ "<p>Your cart is empty.</p>";
+
+
+ let subtotal=
+ cart.reduce(
+  (sum,x)=>
+  sum+x.price*x.qty,
+  0
+ );
+
+
+ let r=getRestaurant();
+
+ let gst=
+ r.gstEnabled
+ ?
+ subtotal*
+ Number(r.gstRate)/100
+ :
+ 0;
+
+
+ document.getElementById(
+  "subtotal"
+ ).innerText=
+ subtotal.toFixed(2);
+
+ document.getElementById(
+  "gstAmount"
+ ).innerText=
+ gst.toFixed(2);
+
+ document.getElementById(
+  "grandTotal"
+ ).innerText=
+ (subtotal+gst).toFixed(2);
+
+}
+
+
+function changeQty(id,value){
+
+ let item=
+ cart.find(
+  x=>x.id===id
+ );
+
+ if(!item)return;
+
+ item.qty+=value;
+
+
+ if(item.qty<=0){
+
+  cart=
+  cart.filter(
+   x=>x.id!==id
+  );
+
+ }
+
+
+ updateCart();
+
+}
+
+
+function openCart(){
+
+ updateCart();
+
+ document.getElementById(
+  "cartModal"
+ ).style.display="block";
+
+}
+
+
+function closeModal(){
+
+ document.querySelectorAll(
+  ".modal"
+ ).forEach(
+  x=>{
+   x.style.display="none";
+  }
+ );
+
+}
+
+
+/* =====================================================
+ORDER
+===================================================== */
+
+async function placeOrder(){
+ if(actionBusy)return;
+ actionBusy=true;
+ const placeBtn=document.querySelector('#cartModal button[onclick="placeOrder()"]');
+ setButtonBusy(placeBtn,true,"Placing Order…");
+ try{
+ let r=getRestaurant();
+
+
+ if(
+  isFrozen(r) ||
+  getRestaurantState(r)!=="open"
+ ){
+
+  alert(
+   "Restaurant अभी order नहीं ले रहा है।"
+  );
+
+  return;
+
+ }
+
+
+ let customer=
+ document.getElementById(
+  "customerName"
+ ).value.trim();
+
+ let table=
+ document.getElementById(
+  "tableNumber"
+ ).value.trim();
+
+
+ if(!customer){
+
+  alert(
+   "Customer name required."
+  );
+
+  return;
+
+ }
+
+
+ if(!table){
+
+  alert(
+   "Table number required."
+  );
+
+  return;
+
+ }
+
+
+ if(cart.length===0){
+
+  alert(
+   "Cart is empty."
+  );
+
+  return;
+
+ }
+
+
+ let subtotal=
+ cart.reduce(
+  (sum,x)=>
+  sum+x.price*x.qty,
+  0
+ );
+
+
+ let gst=
+ r.gstEnabled
+ ?
+ subtotal*
+ Number(r.gstRate)/100
+ :
+ 0;
+
+
+ let total=
+ subtotal+gst;
+
+
+ let order={
+
+  // Supabase orders.id is UUID, so generate a real UUID here.
+  id:
+  crypto.randomUUID(),
+
+  restaurantId:r.id,
+
+  customer:customer,
+
+  table:table,
+
+  items:
+  cart.map(
+   x=>({
+
+    name:x.name,
+
+    price:x.price,
+
+    qty:x.qty,
+
+    total:
+    x.price*x.qty
+
+   })
+  ),
+
+  subtotal:subtotal,
+
+  gst:gst,
+
+  gstRate:
+  r.gstRate,
+
+  total:total,
+
+  status:"pending",
+
+  date:
+  new Date().toISOString()
+
+ };
+
+
+ try{await saveOrder(order);orders.push(order);saveCustomerOrderId(order.id,order.restaurantId);}catch(e){showDBError(e);return;}
+
+ cart=[];
+
+ closeModal();
+
+ showBill(order);
+
+
+ document.getElementById(
+  "customerName"
+ ).value="";
+
+ document.getElementById(
+  "tableNumber"
+ ).value="";
+
+}finally{
+  actionBusy=false;
+  setButtonBusy(placeBtn,false);
+ }
+
+}
+
+
+
+/* =====================================================
+CUSTOMER ORDER HISTORY
+===================================================== */
+
+function customerOrderKey(restaurantId){
+ return "myOrders_"+restaurantId;
+}
+
+function getCustomerOrderIds(restaurantId){
+ try{
+  const ids=JSON.parse(localStorage.getItem(customerOrderKey(restaurantId))||"[]");
+  return Array.isArray(ids)?ids:[];
+ }catch(e){return [];}
+}
+
+function saveCustomerOrderId(id,restaurantId){
+ const key=customerOrderKey(restaurantId);
+ const ids=getCustomerOrderIds(restaurantId).filter(x=>x!==id);
+ ids.push(id);
+ localStorage.setItem(key,JSON.stringify(ids.slice(-20)));
+}
+
+function orderStatusLabel(status){
+ const labels={pending:"Pending",preparing:"Preparing",ready:"Ready",served:"Served",cancelled:"Cancelled"};
+ return labels[String(status||"pending").toLowerCase()]||status||"Pending";
+}
+
+async function openMyOrders(){
+ const r=getRestaurant();
+ if(!r)return;
+ const ids=getCustomerOrderIds(r.id);
+ const box=document.getElementById("myOrdersContent");
+ document.getElementById("myOrdersModal").style.display="block";
+
+ if(!ids.length){
+  box.innerHTML='<div class="section" style="text-align:center"><h3>अभी कोई order नहीं है</h3><p style="color:#777">Order करने के बाद वह यहाँ दिखाई देगा।</p></div>';
+  return;
+ }
+
+ /*
+  First use orders already loaded in memory. This is important because
+  Supabase RLS may allow the app to display an order that a fresh SELECT
+  does not return. In that case My Orders must not incorrectly say
+  "Order नहीं मिला".
+ */
+ const localFound=orders
+  .filter(x=>x.restaurantId===r.id && ids.includes(x.id))
+  .sort((a,b)=>ids.indexOf(b.id)-ids.indexOf(a.id));
+
+ if(localFound.length){
+  renderMyOrders(localFound);
+ }
+ else{
+  box.innerHTML='<p style="text-align:center">Orders load हो रहे हैं...</p>';
+ }
+
+ try{
+  const {data,error}=await supabaseClient
+   .from("orders")
+   .select("*")
+   .in("id",ids);
+
+  if(error)throw error;
+
+  const fresh=(data||[])
+   .map(orderFromDB)
+   .sort((a,b)=>ids.indexOf(b.id)-ids.indexOf(a.id));
+
+  /* Use fresh Supabase data when available; otherwise keep the local data. */
+  if(fresh.length){
+   orders=orders.map(old=>{
+    const updated=fresh.find(x=>x.id===old.id);
+    return updated||old;
+   });
+   renderMyOrders(fresh);
+  }else if(localFound.length){
+   renderMyOrders(localFound);
+  }else{
+   renderMyOrders([]);
+  }
+ }catch(e){
+  /* If SELECT is blocked by RLS, the already-loaded local order is still valid. */
+  if(!localFound.length){
+   box.innerHTML='<p style="color:#b91c1c">Orders load नहीं हो पाए।</p>';
+   showDBError(e);
+  }else{
+   renderMyOrders(localFound);
+  }
+ }
+}
+
+function renderMyOrders(list){
+ const box=document.getElementById("myOrdersContent");
+ if(!list.length){
+  box.innerHTML='<div class="section" style="text-align:center"><h3>Order नहीं मिला</h3></div>';
+  return;
+ }
+ box.innerHTML=list.map(order=>`
+  <div class="order-box">
+   <h3>Order #${String(order.id).slice(0,8)}</h3>
+   <p>
+    <b>Status:</b> ${orderStatusLabel(order.status)}
+    <br>
+    <b>Table:</b> ${order.table}
+    <br>
+    <b>Total:</b> ₹${order.total.toFixed(2)}
+    <br>
+    <small>${order.date}</small>
+   </p>
+   <button class="primary" onclick='showBill(${JSON.stringify(order)})'>View Bill</button>
+   ${String(order.status||"pending").toLowerCase()==="pending" ? `<button class="danger" style="margin-left:6px" onclick="cancelCustomerOrder('${order.id}')">❌ Cancel Order</button>` : ""}
+  </div>
+ `).join("");
+}
+
+async function cancelCustomerOrder(id){
+ const order=orders.find(x=>x.id===id);
+ if(!order)return;
+ if(String(order.status||"pending").toLowerCase()!=="pending"){alert("यह order अब cancel नहीं किया जा सकता।");return;}
+ if(!confirm("क्या आप यह order cancel करना चाहते हैं?"))return;
+ try{
+  const {error}=await supabaseClient.from("orders").update({status:"cancelled"}).eq("id",id);
+  if(error)throw error;
+  order.status="cancelled";
+  const r=getRestaurant();
+  const ids=getCustomerOrderIds(r.id);
+  renderMyOrders(ids.map(orderId=>orders.find(x=>x.id===orderId)).filter(Boolean).reverse());
+ }catch(e){showDBError(e);}
+}
+
+/* =====================================================
+BILL
+===================================================== */
+
+function showBill(order){
+
+ let r=
+ restaurants.find(
+  x=>x.id===order.restaurantId
+ ) || getRestaurant();
+
+
+ document.getElementById(
+  "billContent"
+ ).innerHTML=`
+
+ <div id="printBill">
+
+  <div style="text-align:center">
+
+   <img
+   src="${r.logo}"
+   style="
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:50%
+   ">
+
+   <h1>${r.name}</h1>
+
+   <p>${r.details}</p>
+
+  </div>
+
+  <hr>
+
+  <br>
+
+  <p>
+   <b>Order:</b>
+   ${order.id}
+  </p>
+
+  <p>
+   <b>Customer:</b>
+   ${order.customer}
+  </p>
+
+  <p>
+   <b>Table:</b>
+   ${order.table}
+  </p>
+
+  <p>
+   <b>Date:</b>
+   ${order.date}
+  </p>
+
+  <br>
+
+  ${
+   order.items.map(
+    x=>`
+
+    <p>
+     ${x.name}
+     × ${x.qty}
+     =
+     ₹${x.total.toFixed(2)}
+    </p>
+
+    `
+   ).join("")
+  }
+
+  <br>
+
+  <p>
+   Subtotal:
+   ₹${order.subtotal.toFixed(2)}
+  </p>
+
+  <p>
+   GST (${order.gstRate}%):
+   ₹${order.gst.toFixed(2)}
+  </p>
+
+  <h2>
+   Grand Total:
+   ₹${order.total.toFixed(2)}
+  </h2>
+
+  <br>
+
+  <p style="text-align:center">
+   Thank you for visiting!
+  </p>
+
+ </div>
+
+ <br>
+
+ <button
+ class="gold"
+ onclick="printBill()">
+
+ 🖨️ Print Bill
+
+ </button>
+
+ <button
+ class="secondary"
+ onclick="closeModal()">
+
+ Close
+
+ </button>
+
+ `;
+
+
+ document.getElementById(
+  "billModal"
+ ).style.display="block";
+
+}
+
+
+function printBill(){
+
+ let content=
+ document.getElementById(
+  "printBill"
+ ).innerHTML;
+
+
+ let win=
+ window.open(
+  "",
+  "_blank"
+ );
+
+
+ win.document.write(`
+
+ <html>
+
+ <head>
+
+ <title>
+ Restaurant Bill
+ </title>
+
+ <style>
+
+ body{
+  font-family:Arial;
+  padding:20px;
+ }
+
+ </style>
+
+ </head>
+
+ <body>
+
+ ${content}
+
+ </body>
+
+ </html>
+
+ `);
+
+
+ win.document.close();
+
+ win.print();
+
+}
+
+
+/* =====================================================
+ORDERS
+===================================================== */
+
+function renderOrders(){
+
+ let r=getRestaurant();
+
+
+ let myOrders=
+ orders.filter(
+  x=>x.restaurantId===r.id
+ );
+
+
+ if(!myOrders.length){
+
+  document.getElementById(
+   "orders"
+  ).innerHTML=
+  "<p>No orders yet.</p>";
+
+  return;
+
+ }
+
+
+ document.getElementById(
+  "orders"
+ ).innerHTML=
+
+ [...myOrders]
+ .reverse()
+ .map(
+  order=>`
+
+  <div class="order-box">
+
+   <h3>${order.id}</h3>
+
+   <p>
+
+    Customer:
+    <b>${order.customer}</b>
+
+    <br>
+
+    Table:
+    <b>${order.table}</b>
+
+    <br>
+
+    Total:
+    <b>₹${order.total.toFixed(2)}</b>
+
+    <br>
+
+    ${order.date}
+
+   </p>
+
+   <br>
+
+   <select
+   onchange="
+   updateOrderStatus(
+    '${order.id}',
+    this.value
+   )">
+
+    ${
+     [
+      {value:"pending",label:"Pending"},
+      {value:"preparing",label:"Preparing"},
+      {value:"ready",label:"Ready"},
+      {value:"served",label:"Served"},
+      {value:"cancelled",label:"Cancelled"}
+     ].map(
+      s=>`
+
+      <option
+      value="${s.value}"
+      ${
+       s.value===order.status
+       ?
+       "selected"
+       :
+       ""
+      }>
+
+      ${s.label}
+
+      </option>
+
+      `
+     ).join("")
+    }
+
+   </select>
+
+
+   <button
+   class="primary"
+   onclick='showBill(${JSON.stringify(order)})'>
+
+   View Bill
+
+   </button>
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+async function updateOrderStatus(
+ id,
+ status
+){
+
+ let order=
+ orders.find(
+  x=>x.id===id
+ );
+
+ if(!order)return;
+
+ try{
+  const {error}=await supabaseClient
+   .from("orders")
+   .update({status:status})
+   .eq("id",id);
+
+  if(error)throw error;
+
+  order.status=status;
+  renderOrders();
+ }catch(e){
+  showDBError(e);
+ }
+
+}
+
+
+/* =====================================================
+OWNER
+===================================================== */
+
+function renderOwner(){
+ document.getElementById("totalRestaurants").innerText=restaurants.length;
+ document.getElementById("activeRestaurants").innerText=restaurants.filter(x=>x.active).length;
+ document.getElementById("frozenRestaurants").innerText=restaurants.filter(x=>isFrozen(x)).length;
+ renderRestaurants();
+}
+
+
+/* =====================================================
+CREATE RESTAURANT
+===================================================== */
+
+async function createRestaurant(){
+ let name=document.getElementById("newRestaurantName").value.trim();
+ let adminId=document.getElementById("newRestaurantAdmin").value.trim();
+ let adminPassword=document.getElementById("newRestaurantPassword").value;
+ let email=document.getElementById("newRestaurantEmail").value.trim().toLowerCase();
+ if(!name||!adminId||!adminPassword||!email){alert("सभी details भरें।");return;}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert("Valid Admin Gmail/Email डालें।");return;}
+ if(restaurants.some(r=>r.adminId===adminId)){alert("यह Admin Login ID पहले से मौजूद है।");return;}
+ let id=crypto.randomUUID();
+ const authEmail=adminAuthEmail(id);
+ try{
+  // Create Admin Auth account without disturbing the Owner session.
+  const {data:authData,error:authError}=await authProvisionClient.auth.signUp({
+   email:authEmail,
+   password:adminPassword,
+   options:{data:{role:"admin",restaurant_id:id,admin_id:adminId}}
+  });
+  if(authError && !/already registered|already exists|user already/i.test(authError.message||""))throw authError;
+  if(!authData?.user)throw new Error("Admin Auth user create नहीं हुआ।");
+  if(!authData.session){
+   // Verify that the account can actually sign in.
+   const {error:verifyError}=await authProvisionClient.auth.signInWithPassword({email:authEmail,password:adminPassword});
+   if(verifyError)throw new Error("Admin Auth account बन गया लेकिन login-ready नहीं है। Authentication में Confirm email OFF करके Save changes करें, फिर Restaurant दोबारा बनाएं।");
+  }
+
+  const restaurant={id,name,email,adminId,adminPassword:"",details:"Digital QR Menu",banner:DEFAULT_BANNER,logo:DEFAULT_LOGO,active:true,gstEnabled:true,gstRate:5,gstin:"",schedule:JSON.parse(JSON.stringify(DEFAULT_SCHEDULE)),freezeStart:"",freezeEnd:"",freezeReason:"",created:new Date().toLocaleString()};
+  await saveRestaurant(restaurant);
+  await loadData();
+  renderOwner();
+  document.getElementById("newRestaurantName").value="";
+  document.getElementById("newRestaurantAdmin").value="";
+  document.getElementById("newRestaurantPassword").value="";
+  document.getElementById("newRestaurantEmail").value="";
+  alert("Restaurant successfully created!\n\nRestaurant ID: "+id+"\nAdmin Login ID: "+adminId+"\n\nAdmin अब इसी Login ID + Password से login करेगा।");
+ }catch(e){
+  console.error(e);
+  alert("Restaurant/Auth create failed: "+(e?.message||e));
+ }
+}
+
+/* =====================================================
+OWNER RESTAURANTS
+===================================================== */
+
+function renderRestaurants(){
+
+ let search=
+ document.getElementById(
+  "restaurantSearch"
+ )?.value
+ .toLowerCase() || "";
+
+
+ let list=
+ restaurants.filter(
+  r=>
+
+  r.name
+  .toLowerCase()
+  .includes(search)
+
+  ||
+
+  r.email
+  .toLowerCase()
+  .includes(search)
+
+  ||
+
+  r.id
+  .toLowerCase()
+  .includes(search)
+
+ );
+
+
+ document.getElementById(
+  "restaurants"
+ ).innerHTML=
+
+ list.map(
+  r=>`
+
+  <div class="section">
+
+   <h3>
+    🏪 ${r.name}
+   </h3>
+
+   <p>
+    Restaurant ID:
+    <b>${r.id}</b>
+   </p>
+
+   <p>
+    Admin ID:
+    <b>${r.adminId}</b>
+   </p>
+
+   <p>
+    Admin Email:
+    ${r.email}
+   </p>
+
+   <p>
+    Status:
+
+    ${
+     isFrozen(r)
+     ?
+     `
+     <b style="color:#b91c1c">
+      🔒 FROZEN
+     </b>
+     `
+     :
+     `
+     <b style="color:#15803d">
+      🟢 ACTIVE
+     </b>
+     `
+    }
+
+   </p>
+
+   <p>
+    Menu URL:
+    ${getMenuURL(r.id)}
+   </p>
+
+
+   ${
+    r.freezeStart
+    ?
+    `
+
+    <div class="freeze-panel">
+
+     <span class="freeze-badge">
+      🔒 OWNER FREEZE
+     </span>
+
+     <br><br>
+
+     <b>Start:</b>
+
+     ${new Date(
+      r.freezeStart
+     ).toLocaleString()}
+
+     <br>
+
+     <b>End:</b>
+
+     ${new Date(
+      r.freezeEnd
+     ).toLocaleString()}
+
+     <br><br>
+
+     <b>Reason:</b>
+
+     ${r.freezeReason || ""}
+
+    </div>
+
+    `
+    :
+    ""
+   }
+
+
+   <br>
+
+   <button
+   class="primary"
+   onclick="copyMenu('${r.id}')">
+
+   📋 Copy Menu URL
+
+   </button>
+
+
+   <button
+   class="primary"
+   onclick="openRestaurant('${r.id}')">
+
+   Open Menu
+
+   </button>
+
+
+   <hr style="margin:20px 0">
+
+
+   <!-- OWNER ONLY FREEZE -->
+
+   <h3>
+    🔒 Owner Freeze Control
+   </h3>
+
+   <p style="
+    color:#777;
+    margin-bottom:12px
+   ">
+
+   केवल Owner इस restaurant को
+   freeze/unfreeze कर सकता है।
+
+   </p>
+
+
+   <div class="form-group">
+
+    <label>
+     Freeze Start
+    </label>
+
+    <input
+    id="ownerFreezeStart_${r.id}"
+    type="datetime-local">
+
+   </div>
+
+
+   <div class="form-group">
+
+    <label>
+     Freeze End
+    </label>
+
+    <input
+    id="ownerFreezeEnd_${r.id}"
+    type="datetime-local">
+
+   </div>
+
+
+   <div class="form-group">
+
+    <label>
+     Customer को दिखने वाला कारण
+    </label>
+
+    <input
+    id="ownerFreezeReason_${r.id}"
+    placeholder="Restaurant इस समय बंद है।">
+
+   </div>
+
+
+   <button
+   class="danger"
+   onclick="ownerFreeze('${r.id}')">
+
+   🔒 Freeze Restaurant
+
+   </button>
+
+
+   ${
+    r.freezeStart
+    ?
+    `
+
+    <button
+    class="success"
+    onclick="ownerUnfreeze('${r.id}')">
+
+    🔓 Remove Freeze
+
+    </button>
+
+    `
+    :
+    ""
+   }
+
+
+   <br><br>
+
+
+   <button
+   class="danger"
+   onclick="deleteRestaurant('${r.id}')">
+
+   Permanently Delete
+
+   </button>
+
+  </div>
+
+  `
+ ).join("");
+
+}
+
+
+/* =====================================================
+OWNER FREEZE
+===================================================== */
+
+async function ownerFreeze(id){
+
+ if(
+  !currentUser ||
+  currentUser.type!=="owner"
+ ){
+
+  alert(
+   "Only Owner can freeze a restaurant."
+  );
+
+  return;
+
+ }
+
+
+ let r=
+ restaurants.find(
+  x=>x.id===id
+ );
+
+ if(!r)return;
+
+
+ let start=
+ document.getElementById(
+  "ownerFreezeStart_"+id
+ ).value;
+
+ let end=
+ document.getElementById(
+  "ownerFreezeEnd_"+id
+ ).value;
+
+ let reason=
+ document.getElementById(
+  "ownerFreezeReason_"+id
+ ).value.trim();
+
+
+ if(!start || !end){
+
+  alert(
+   "Freeze Start और End चुनें।"
+  );
+
+  return;
+
+ }
+
+
+ if(
+  new Date(end)<=
+  new Date(start)
+ ){
+
+  alert(
+   "Freeze End, Start के बाद होना चाहिए।"
+  );
+
+  return;
+
+ }
+
+
+ r.freezeStart=start;
+
+ r.freezeEnd=end;
+
+ r.freezeReason=reason||"Restaurant इस समय बंद है।";
+ try{
+  await saveRestaurant(r);
+  await loadData();
+  const saved=restaurants.find(x=>x.id===id);
+  if(!saved || saved.freezeStart!==start || saved.freezeEnd!==end){
+   throw new Error("Freeze save नहीं हुआ। Supabase RLS में UPDATE policy चाहिए।");
+  }
+ }catch(e){showDBError(e);return;}
+
+ renderOwner();
+
+ alert(
+  "🔒 Restaurant successfully frozen."
+ );
+
+}
+
+
+/* =====================================================
+OWNER UNFREEZE
+===================================================== */
+
+async function ownerUnfreeze(id){
+
+ if(
+  !currentUser ||
+  currentUser.type!=="owner"
+ ){
+
+  alert(
+   "Only Owner can unfreeze."
+  );
+
+  return;
+
+ }
+
+
+ let r=
+ restaurants.find(
+  x=>x.id===id
+ );
+
+ if(!r)return;
+
+
+ if(
+  !confirm(
+   "क्या आप इस restaurant का freeze हटाना चाहते हैं?"
+  )
+ ){
+
+  return;
+
+ }
+
+
+ r.freezeStart="";
+
+ r.freezeEnd="";
+
+ r.freezeReason="";
+ try{await saveRestaurant(r);await loadData();}catch(e){showDBError(e);return;}
+
+ renderOwner();
+
+
+ alert(
+  "🔓 Restaurant successfully unfrozen."
+ );
+
+}
+
+
+/* =====================================================
+MENU URL
+===================================================== */
+
+function getMenuURL(id, table=""){
+
+ let url =
+ location.origin +
+ "/?restaurant=" +
+ encodeURIComponent(id);
+
+ if(table){
+
+  url +=
+  "&table=" +
+  encodeURIComponent(table);
+
+ }
+
+ return url;
+
+}
+
+
+/* =====================================================
+COPY MENU
+===================================================== */
+
+function copyMenu(id){
+
+ let url =
+ getMenuURL(id);
+
+ if(
+  navigator.clipboard
+ ){
+
+  navigator.clipboard
+  .writeText(url);
+
+  alert(
+   "Menu URL copied:\n"+url
+  );
+
+ }else{
+
+  prompt(
+   "Menu URL copy करें:",
+   url
+  );
+
+ }
+
+}
+
+
+/* =====================================================
+OPEN RESTAURANT
+===================================================== */
+
+function openRestaurant(id){
+
+ currentRestaurantId=id;
+ localStorage.setItem("currentRestaurantId",currentRestaurantId);
+ showPage("customer");
+
+}
+
+
+/* =====================================================
+DELETE RESTAURANT
+===================================================== */
+
+async function deleteRestaurant(id){
+
+ if(
+  !currentUser ||
+  currentUser.type!=="owner"
+ ){
+
+  alert(
+   "Only Owner can delete restaurants."
+  );
+
+  return;
+
+ }
+
+
+ let r=
+ restaurants.find(
+  x=>x.id===id
+ );
+
+ if(!r)return;
+
+
+ if(
+  !confirm(
+   "Permanently delete "+
+   r.name+
+   "?\n\nThis action cannot be undone."
+  )
+ ){
+
+  return;
+
+ }
+
+
+ try{
+  await deleteRestaurantData(id);
+  if(currentRestaurantId===id){
+   currentRestaurantId="";
+   localStorage.removeItem("currentRestaurantId");
+  }
+  localStorage.removeItem("myOrders_"+id);
+  await loadData();
+  renderOwner();
+ }catch(e){showDBError(e);return;}
+
+ alert(
+  "Restaurant deleted successfully."
+ );
+
+}
+
+
+/* =====================================================
+LIVE PREVIEW
+===================================================== */
+
+document.addEventListener(
+ "input",
+ function(e){
+
+  if(
+   e.target.id===
+   "restaurantNameInput"
+  ){
+
+   document.getElementById(
+    "previewName"
+   ).innerText=
+   e.target.value;
+
+  }
+
+
+  if(
+   e.target.id===
+   "restaurantDetailsInput"
+  ){
+
+   document.getElementById(
+    "previewDetails"
+   ).innerText=
+   e.target.value;
+
+  }
+
+
+  if(
+   e.target.id===
+   "bannerUrl"
+  ){
+
+   document.getElementById(
+    "previewBanner"
+   ).src=
+   e.target.value;
+
+  }
+
+
+  if(
+   e.target.id===
+   "logoUrl"
+  ){
+
+   document.getElementById(
+    "previewLogo"
+   ).src=
+   e.target.value;
+
+  }
+
+
+  if(
+   e.target.id===
+   "restaurantSearch"
+  ){
+
+   renderRestaurants();
+
+  }
+
+ });
+
+
+/* =====================================================
+URL TABLE SUPPORT
+===================================================== */
+
+function readTableFromURL(){
+
+ let params=
+ new URLSearchParams(
+  window.location.search
+ );
+
+ let table=
+ params.get("table");
+
+ if(table){
+
+  document.getElementById(
+   "tableNumber"
+  ).value=table;
+
+ }
+
+}
+
+
+/* =====================================================
+PUBLIC QR MENU MODE
+===================================================== */
+
+function openPublicMenu(){
+
+ let params =
+ new URLSearchParams(
+  window.location.search
+ );
+
+ let restaurantId =
+ params.get("restaurant");
+
+ if(!restaurantId){
+  return;
+ }
+
+ let restaurant =
+ restaurants.find(
+  r=>r.id===restaurantId
+ );
+
+ if(!restaurant){
+
+  document.getElementById(
+   "loginPage"
+  ).innerHTML = `
+   <div class="login-box" style="text-align:center">
+    <div class="login-logo">🍽️ <span>Special Custom</span></div>
+
+    <h3 style="margin:15px 0 8px">
+     Restaurant Not Found
+    </h3>
+
+    <p style="color:#777">
+     यह QR link इस device पर उपलब्ध restaurant data से नहीं जुड़ा है।
+    </p>
+
+    <p style="margin-top:12px">
+     Restaurant ID:
+     <b>${restaurantId}</b>
+    </p>
+   </div>
+  `;
+
+  return;
+
+ }
+
+ currentRestaurantId =
+ restaurantId;
+
+ currentUser = {
+  type:"public",
+  restaurantId:restaurantId
+ };
+
+ document.getElementById(
+  "loginPage"
+ ).classList.add("hidden");
+
+ document.getElementById(
+  "app"
+ ).classList.remove("hidden");
+
+ document.querySelector(
+  "header"
+ ).classList.add("hidden");
+
+ document.getElementById(
+  "mainNav"
+ ).classList.add("hidden");
+
+ document.getElementById(
+  "customerPage"
+ ).classList.remove("hidden");
+
+ document.getElementById(
+  "adminPage"
+ ).classList.add("hidden");
+
+ document.getElementById(
+  "ownerPage"
+ ).classList.add("hidden");
+
+ document.querySelector(
+  ".cart"
+ ).classList.remove("hidden");
+
+ renderMenu();
+
+ readTableFromURL();
+
+ updateCart();
+
+}
+
+
+/* =====================================================
+START
+===================================================== */
+
+async function startApp(){
+ try{
+  await loadData();
+  console.log("Supabase connected successfully. Data loaded.");
+  if(new URLSearchParams(window.location.search).get("restaurant")){openPublicMenu();updateCart();return;}
+  const {data:{session}}=await supabaseClient.auth.getSession();
+  if(session?.user){
+   const user=session.user;
+   if(user.user_metadata?.role==="owner"){
+    currentUser={type:"owner",authUserId:user.id,email:user.email||""};
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");setupNavigation();showPage("owner");return;
+   }
+   const restaurantId=user.user_metadata?.restaurant_id;
+   const restaurant=restaurants.find(r=>r.id===restaurantId);
+   if(restaurant && user.user_metadata?.role==="admin"){
+    currentUser={type:"admin",restaurantId:restaurant.id,authUserId:user.id,email:user.email||""};
+    currentRestaurantId=restaurant.id;localStorage.setItem("currentRestaurantId",currentRestaurantId);
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");setupNavigation();showPage("admin");return;
+   }
+   await supabaseClient.auth.signOut();
+  }
+  updateCart();
+ }catch(e){console.error("Supabase connection/data error:",e);document.getElementById("loginMessage").innerText="Database connection failed: "+(e?.message||e);}
+}
+supabaseClient.auth.onAuthStateChange((event,session)=>{console.log("Supabase Auth:",event);});
+startApp();
+
+</script>
+
+</div>
+
+</body>
+</html>
